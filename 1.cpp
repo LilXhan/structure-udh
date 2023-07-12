@@ -188,20 +188,16 @@ void mostrarTiempoRestante(const Entidad& entidad) {
 }
 
 pair<int, int> obtenerTiempoRestante(const string& fecha_fin) {
-    // Obtiene la fecha actual
     auto now = chrono::system_clock::now();
     time_t now_time = chrono::system_clock::to_time_t(now);
     struct tm* now_tm = localtime(&now_time);
 
-    // Obtiene los componentes de la fecha de fin del periodo de licenciamiento
     int anio_fin = stoi(fecha_fin.substr(0, 4));
     int mes_fin = stoi(fecha_fin.substr(4, 2));
 
-    // Calcula la diferencia en años y meses entre la fecha actual y la fecha de fin
     int aniosRestantes = anio_fin - (now_tm->tm_year + 1900);
     int mesesRestantes = mes_fin - (now_tm->tm_mon + 1);
 
-    // Ajusta los valores si el mes actual es mayor que el mes de fin
     if (mesesRestantes < 0) {
         mesesRestantes += 12;
         aniosRestantes--;
